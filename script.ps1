@@ -5,12 +5,12 @@
     [array]$Cc
 )
 
-$ref = Import-Csv -Path '.\list.csv' -Delimiter ';' -Encoding UTF8
+$ref = Import-Csv -Path "$PSScriptRoot\list.csv" -Delimiter ';' -Encoding UTF8
 $dif = Get-ADGroupMember -Identity 'Domain Admins' -Recursive | Select-Object Name,SamAccountName,SID
 $all = $ref + $dif
 
 if ($UpdateList.IsPresent) { 
-    $dif | Export-Csv -Path '.\list.csv' -Delimiter ';' -Encoding UTF8 -NoTypeInformation
+    $dif | Export-Csv -Path "$PSScriptRoot\list.csv" -Delimiter ';' -Encoding UTF8 -NoTypeInformation
     exit
 }
 
